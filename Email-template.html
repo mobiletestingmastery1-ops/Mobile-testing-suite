@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Communication Templates</title>
+    <style>
+        @media print {
+            .no-print { display: none; }
+            body { margin: 0; padding: 20px; }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            color: #333;
+        }
+        
+        .container {
+            background: white;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            border-radius: 12px;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 4px solid #ec4899;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .logo-space {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+            border: 2px dashed #ec4899;
+            padding: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ec4899;
+            font-style: italic;
+            border-radius: 8px;
+        }
+        
+        h1 {
+            color: #db2777;
+            margin: 0 0 10px 0;
+            font-size: 32px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #64748b;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .intro-section {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            border-left: 4px solid #ec4899;
+        }
+        
+        .intro-section h2 {
+            margin: 0 0 10px 0;
+            color: #9f1239;
+            font-size: 20px;
+        }
+        
+        .intro-section p {
+            margin: 8px 0;
+            line-height: 1.6;
+            color: #be123c;
+        }
+        
+        .template-section {
+            margin: 40px 0;
+            page-break-inside: avoid;
+        }
+        
+        .template-header {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            color: white;
+            padding: 15px 25px;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(236, 72, 153, 0.2);
+        }
+        
+        .template-number {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .email-card {
+            background: #fafafa;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 0;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .email-subject {
+            background: #f1f5f9;
+            padding: 15px 20px;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .email-subject label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #64748b;
+            display: block;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+        
+        .email-body {
+            padding: 25px;
+            line-height: 1.8;
+            color: #334155;
+        }
+        
+        .email-body p {
+            margin: 15px 0;
+        }
+        
+        .merge-tag {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .tips-box {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .tips-box h4 {
+            margin: 0 0 10px 0;
+            color: #1e40af;
+            font-size: 14px;
+        }
+        
+        .tips-box ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .tips-box li {
+            margin: 5px 0;
+            color: #1e40af;
+            font-size: 13px;
+        }
+        
+        .copy-button {
+            background: #ec4899;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 10px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-button:hover {
+            background: #db2777;
+        }
+        
+        .use-case {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-size: 13px;
+            color: #166534;
+        }
+        
+        .use-case strong {
+            color: #15803d;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+        }
+        
+        button.main-button {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0 10px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(236, 72, 153, 0.2);
+        }
+        
+        button.main-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(236, 72, 153, 0.3);
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .signature-block {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container no-print">
+        <button class="main-button" onclick="window.print()">📄 Print All Templates</button>
+        <button class="main-button" onclick="exportTemplates()">💾 Export Templates</button>
+    </div>
+
+    <div class="container">
+        <div class="logo-space">
+            [Your Business Logo Here]
+        </div>
+        
+        <div class="header">
+            <h1>Client Communication Templates</h1>
+            <p class="subtitle">Professional Email Templates for Every Client Interaction</p>
+        </div>
+
+        <div class="intro-section">
+            <h2>💌 How to Use These Templates</h2>
+            <p>
+                These ready-to-use email templates cover every stage of the client journey—from initial booking to follow-up. 
+                Simply customize the <span class="merge-tag">[MERGE TAGS]</span> with your client's information and send!
+            </p>
+            <p style="margin-top: 15px; font-weight: 600;">
+                <strong>Pro Tip:</strong> Save these in your email system as templates or quick responses for instant access. 
+                Consistent, professional communication builds trust and improves your client experience.
+            </p>
+        </div>
+
+        <!-- TEMPLATE 1: APPOINTMENT CONFIRMATION -->
+        <div class="template-section">
+            <div class="template-header">
+                <span>📅 Template 1: Appointment Confirmation</span>
+                <span class="template-number">#1</span>
+            </div>
+
+            <div class="use-case">
+                <strong>When to Use:</strong> Immediately after a client books an appointment, whether online or by phone.
+            </div>
+
+            <div class="email-card">
+                <div class="email-subject">
+                    <label>Subject Line:</label>
+                    Your <span class="merge-tag">[SERVICE TYPE]</span> Appointment is Confirmed! 🎉
+                </div>
+                <div class="email-body">
+                    <p>Hi <span class="merge-tag">[CLIENT FIRST NAME]</span>,</p>
+
+                    <p>Great news! Your mobile testing appointment is confirmed and we're looking forward to serving you.</p>
+
+                    <p><strong>📋 Appointment Details:</strong><br>
+                    <strong>Date:</strong> <span class="merge-tag">[DATE]</span><br>
+                    <strong>Time:</strong> <span class="merge-tag">[TIME]</span><br>
+                    <strong>Service:</strong> <span class="merge-tag">[SERVICE TYPE]</span><br>
+                    <strong>Location:</strong> <span class="merge-tag">[ADDRESS]</span><br>
+                    <strong>Technician:</strong> <span class="merge-tag">[TECH NAME]</span> will arrive at your location</p>
+
+                    <p><strong>💰 Payment:</strong><br>
+                    Total Amount: <span class="merge-tag">[AMOUNT]</span><br>
+                    Payment Due: At time of service<br>
+                    We accept: Credit/Debit Cards, Cash, Venmo, Zelle</p>
+
+                    <p><strong>📱 What to Expect:</strong><br>
+                    • Our certified technician will arrive promptly at your scheduled time<br>
+                    • Please have your photo ID ready<br>
+                    • The entire process takes approximately <span class="merge-tag">[DURATION]</span><br>
+                    • Results will be available in <span class="merge-tag">[TURNAROUND TIME]</span></p>
+
+                    <p><strong>Need to Reschedule?</strong><br>
+                    No problem! Just reply to this email or call us at <span class="merge-tag">[PHONE]</span> at least 24 hours before your appointment.</p>
+
+                    <p>If you have any questions, we're here to help!</p>
+
+                    <p>Looking forward to seeing you soon!</p>
+
+                    <div class="signature-block">
+Best regards,<br>
+<span class="merge-tag">[YOUR NAME]</span><br>
+<span class="merge-tag">[YOUR BUSINESS NAME]</span><br>
+📞 <span class="merge-tag">[PHONE]</span><br>
+📧 <span class="merge-tag">[EMAIL]</span><br>
+🌐 <span class="merge-tag">[WEBSITE]</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="copy-button" onclick="copyTemplate(1)">📋 Copy Template</button>
+
+            <div class="tips-box">
+                <h4>💡 Customization Tips:</h4>
+                <ul>
+                    <li>Add a confirmation number for easy reference</li>
+                    <li>Include a calendar attachment (.ics file) so clients can add to their calendar</li>
+                    <li>Link to your cancellation policy if applicable</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEMPLATE 2: PRE-APPOINTMENT INSTRUCTIONS -->
+        <div class="template-section">
+            <div class="template-header">
+                <span>📝 Template 2: Pre-Appointment Instructions</span>
+                <span class="template-number">#2</span>
+            </div>
+
+            <div class="use-case">
+                <strong>When to Use:</strong> 24 hours before the appointment to remind client and provide preparation instructions.
+            </div>
+
+            <div class="email-card">
+                <div class="email-subject">
+                    <label>Subject Line:</label>
+                    Tomorrow's Appointment - Important Preparation Instructions ⏰
+                </div>
+                <div class="email-body">
+                    <p>Hi <span class="merge-tag">[CLIENT FIRST NAME]</span>,</p>
+
+                    <p>This is a friendly reminder about your mobile testing appointment tomorrow!</p>
+
+                    <p><strong>🕐 Appointment Reminder:</strong><br>
+                    <strong>Tomorrow:</strong> <span class="merge-tag">[DATE]</span> at <span class="merge-tag">[TIME]</span><br>
+                    <strong>Service:</strong> <span class="merge-tag">[SERVICE TYPE]</span><br>
+                    <strong>Location:</strong> <span class="merge-tag">[ADDRESS]</span></p>
+
+                    <p><strong>✅ Before Your Appointment:</strong></p>
+
+                    <p><em>[FOR BLOOD WORK/PHLEBOTOMY:]</em><br>
+                    • Fast for 8-12 hours (water is okay)<br>
+                    • Continue taking prescribed medications unless instructed otherwise<br>
+                    • Stay well-hydrated (drink plenty of water)<br>
+                    • Wear short sleeves or loose-fitting clothing</p>
+
+                    <p><em>[FOR DRUG TESTING:]</em><br>
+                    • Bring valid government-issued photo ID<br>
+                    • Do not add anything to specimen (adulteration is detected)<br>
+                    • Avoid diuretics and excessive water consumption<br>
+                    • Empty pockets before technician arrives</p>
+
+                    <p><em>[FOR DNA TESTING:]</em><br>
+                    • All participants must have photo ID<br>
+                    • Do not eat, drink, smoke, or chew gum 30 minutes before collection<br>
+                    • Minors must have parent/guardian present<br>
+                    • Be prepared for photographs (legal testing only)</p>
+
+                    <p><strong>📋 What to Have Ready:</strong><br>
+                    ✓ Valid photo ID (driver's license, passport, or state ID)<br>
+                    ✓ Payment (if not pre-paid)<br>
+                    ✓ Lab requisition form (if provided by physician)<br>
+                    ✓ Insurance card (if applicable)</p>
+
+                    <p><strong>🚗 Our Technician Will:</strong><br>
+                    • Call or text 15 minutes before arrival<br>
+                    • Bring all necessary equipment<br>
+                    • Verify your identity<br>
+                    • Complete the service professionally and efficiently</p>
+
+                    <p><strong>Questions or Need to Reschedule?</strong><br>
+                    Call or text us: <span class="merge-tag">[PHONE]</span><br>
+                    Email: <span class="merge-tag">[EMAIL]</span></p>
+
+                    <p>We're excited to serve you tomorrow!</p>
+
+                    <div class="signature-block">
+Best regards,<br>
+<span class="merge-tag">[YOUR NAME]</span><br>
+<span class="merge-tag">[YOUR BUSINESS NAME]</span><br>
+📞 <span class="merge-tag">[PHONE]</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="copy-button" onclick="copyTemplate(2)">📋 Copy Template</button>
+
+            <div class="tips-box">
+                <h4>💡 Customization Tips:</h4>
+                <ul>
+                    <li>Only include preparation instructions relevant to the specific service</li>
+                    <li>Add weather-related reminders if applicable</li>
+                    <li>Include parking or building access instructions for difficult-to-find locations</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEMPLATE 3: ON MY WAY -->
+        <div class="template-section">
+            <div class="template-header">
+                <span>🚗 Template 3: "On My Way" Text/Email</span>
+                <span class="template-number">#3</span>
+            </div>
+
+            <div class="use-case">
+                <strong>When to Use:</strong> 15 minutes before arrival at the client's location.
+            </div>
+
+            <div class="email-card">
+                <div class="email-subject">
+                    <label>Subject Line (Email) / Text Message:</label>
+                    On My Way! ETA: <span class="merge-tag">[TIME]</span> 🚗
+                </div>
+                <div class="email-body">
+                    <p>Hi <span class="merge-tag">[CLIENT FIRST NAME]</span>!</p>
+
+                    <p>This is <span class="merge-tag">[TECH NAME]</span> from <span class="merge-tag">[BUSINESS NAME]</span>. I'm on my way to your location and will arrive in approximately 15 minutes.</p>
+
+                    <p><strong>Estimated Arrival:</strong> <span class="merge-tag">[ETA TIME]</span></p>
+
+                    <p><strong>Quick Reminder:</strong> Please have your photo ID ready!</p>
+
+                    <p>I'll text you when I arrive. See you soon!</p>
+
+                    <p>- <span class="merge-tag">[TECH NAME]</span><br>
+                    📞 <span class="merge-tag">[TECH PHONE]</span></p>
+                </div>
+            </div>
+
+            <button class="copy-button" onclick="copyTemplate(3)">📋 Copy Template</button>
+
+            <div class="tips-box">
+                <h4>💡 Customization Tips:</h4>
+                <ul>
+                    <li>Keep this short and friendly - clients appreciate the heads up</li>
+                    <li>Text message is preferred over email for this communication</li>
+                    <li>Include your direct phone number so client can call if needed</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEMPLATE 4: SERVICE COMPLETED -->
+        <div class="template-section">
+            <div class="template-header">
+                <span>✅ Template 4: Service Completed Confirmation</span>
+                <span class="template-number">#4</span>
+            </div>
+
+            <div class="use-case">
+                <strong>When to Use:</strong> Within 2 hours after completing the appointment.
+            </div>
+
+            <div class="email-card">
+                <div class="email-subject">
+                    <label>Subject Line:</label>
+                    Your Sample Has Been Successfully Collected ✓
+                </div>
+                <div class="email-body">
+                    <p>Hi <span class="merge-tag">[CLIENT FIRST NAME]</span>,</p>
+
+                    <p>Thank you for choosing <span class="merge-tag">[BUSINESS NAME]</span> for your testing needs!</p>
+
+                    <p>We wanted to confirm that your <span class="merge-tag">[SERVICE TYPE]</span> was successfully completed today at <span class="merge-tag">[TIME]</span>.</p>
+
+                    <p><strong>📋 Service Summary:</strong><br>
+                    <strong>Date:</strong> <span class="merge-tag">[DATE]</span><br>
+                    <strong>Service:</strong> <span class="merge-tag">[SERVICE TYPE]</span><br>
+                    <strong>Specimen ID:</strong> <span class="merge-tag">[SPECIMEN ID]</span><br>
+                    <strong>Technician:</strong> <span class="merge-tag">[TECH NAME]</span></p>
+
+                    <p><strong>🔬 Next Steps:</strong><br>
+                    • Your specimen has been delivered to the laboratory<br>
+                    • Results typically available in <span class="merge-tag">[TURNAROUND TIME]</span><br>
+                    • You will be notified as soon as results are ready<br>
+                    • Results will be delivered via <span class="merge-tag">[DELIVERY METHOD]</span></p>
+
+                    <p><strong>💰 Payment Confirmation:</strong><br>
+                    Amount Paid: <span class="merge-tag">[AMOUNT]</span><br>
+                    Payment Method: <span class="merge-tag">[PAYMENT TYPE]</span><br>
+                    Receipt Number: <span class="merge-tag">[RECEIPT #]</span></p>
+
+                    <p><strong>📞 Questions?</strong><br>
+                    If you have any questions about your service or results, please don't hesitate to contact us:<br>
+                    Phone: <span class="merge-tag">[PHONE]</span><br>
+                    Email: <span class="merge-tag">[EMAIL]</span></p>
+
+                    <p><strong>🌟 Love Our Service?</strong><br>
+                    We'd appreciate if you could share your experience with others! Word-of-mouth referrals are the best compliment we can receive.</p>
+
+                    <p>Thank you for trusting us with your testing needs!</p>
+
+                    <div class="signature-block">
+Best regards,<br>
+The Team at <span class="merge-tag">[BUSINESS NAME]</span><br>
+📞 <span class="merge-tag">[PHONE]</span><br>
+📧 <span class="merge-tag">[EMAIL]</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="copy-button" onclick="copyTemplate(4)">📋 Copy Template</button>
+        </div>
+
+        <!-- TEMPLATE 5: RESULTS READY -->
+        <div class="template-section">
+            <div class="template-header">
+                <span>📊 Template 5: Results Ready Notification</span>
+                <span class="template-number">#5</span>
+            </div>
+
+            <div class="use-case">
+                <strong>When to Use:</strong> As soon as test results are available from the laboratory.
+            </div>
+
+            <div class="email-card">
+                <div class="email-subject">
+                    <label>Subject Line:</label>
+                    Your Test Results Are Ready 📊
+                </div>
+                <div class="email-body">
+                    <p>Hi <span class="merge-tag">[CLIENT FIRST NAME]</span>,</p>
+
+                    <p>Good news! Your test results are now available.</p>
+
+                    <p><strong>📋 Test Information:</strong><br>
+                    <strong>Test Type:</strong> <span class="merge-tag">[SERVICE TYPE]</span><br>
+                    <strong>Collection Date:</strong> <span class="merge-tag">[DATE]</span><br>
+                    <strong>Results Date:</strong> <span class="merge-tag">[RESULTS DATE]</span><br>
+                    <strong>Specimen ID:</strong> <span class="merge-tag">[SPECIMEN ID]</span></p>
+
+                    <p><strong>🔐 How to Access Your Results:</strong></p>
+
+                    <p><em>[FOR SECURE PORTAL ACCESS:]</em><br>
+                    Your results are available through our secure online portal:<br>
+                    🌐 <span class="merge-tag">[PORTAL LINK]</span><br>
+                    Username: <span class="merge-tag">[USERNAME]</span><br>
+                    Password: <span class="merge-tag">[PASSWORD]</span></p>
+
+                    <p><em>[FOR EMAIL DELIVERY:]</em><br>
+                    Your results are attached to this email as a secure PDF document.</p>
+
+                    <p><em>[FOR PICKUP:]</em><br>
+                    Your results are ready for pickup at our office during business hours. Please bring your photo ID.</p>
+
+                    <p><em>[FOR MAIL:]</em><br>
+                    Your results have been mailed to the address on file. You should receive them within 3-5 business days.</p>
+
+                    <p><strong>❓ Questions About Your Results?</strong><br>
+                    If you have questions or need clarification about your results, please contact us:<br>
+                    📞 Phone: <span class="merge-tag">[PHONE]</span><br>
+                    📧 Email: <span class="merge-tag">[EMAIL]</span></p>
+
+                    <p><strong>⚠️ Important Reminders:</strong><br>
+                    • These results are confidential and protected under HIPAA<br>
+                    • For medical test results, please discuss with your healthcare provider<br>
+                    • Do not share login credentials or forward results electronically<br>
+                    • Keep your results in a secure location</p>
+
+                    <p><strong>🙏 Thank You!</strong><br>
+                    Thank you for choosing <span class="merge-tag">[BUSINESS NAME]</span> for your testing needs. We appreciate your business!</p>
+
+                    <p><strong>Need Another Test?</strong><br>
+                    We're here whenever you need us. Schedule your next appointment anytime at <span class="merge-tag">[WEBSITE]</span> or call <span class="merge-tag">[PHONE]</span>.</p>
+
+                    <div class="signature-block">
+Best regards,<br>
+<span class="merge-tag">[YOUR NAME]</span><br>
+<span class="merge-tag">[BUSINESS NAME]</span><br>
+📞 <span class="merge-tag">[PHONE]</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="copy-button" onclick="copyTemplate(5)">📋 Copy Template</button>
+        </div>
+
+        <!-- TEMPLATE 6: FOLLOW-UP CARE -->
+        <div class="template-section">
+            <div class="template-header">
+                <span>💊 Template 6: Follow-Up & Care Instructions</span>
+                <span class="template-number">#6</span>
+            </div>
+
+            <div class="use-case">
+                <strong>When to Use:</strong> After results are delivered, especially for medical tests requiring follow-up.
+            </div>
+
+            <div class="email-card">
+                <div class="email-subject">
+                    <label>Subject Line:</label>
+                    Important Follow-Up Information About Your Results
+                </div>
+                <div class="email-body">
+                    <p>Hi <span class="merge-tag">[CLIENT FIRST NAME]</span>,</p>
+
+                    <p>We hope this message finds you well. We wanted to reach out regarding the results from your recent <span class="merge-tag">[SERVICE TYPE]</span>.</p>
+
+                    <p><strong>📋 Your Results Summary:</strong><br>
+                    <span class="merge-tag">[BRIEF RESULTS SUMMARY]</span></p>
+
+                    <p><strong>🩺 Recommended Next Steps:</strong></p>
+
+                    <p><em>[FOR NORMAL RESULTS:]</em><br>
+                    Your results were within normal ranges. We recommend:<br>
+                    • Maintaining your current health regimen<br>
+                    • Scheduling a follow-up test in <span class="merge-tag">[TIMEFRAME]</span><br>
+                    • Continuing regular check-ups with your healthcare provider</p>
+
+                    <p><em>[FOR ABNORMAL RESULTS:]</em><br>
+                    Your results showed some values outside normal ranges. We strongly recommend:<br>
+                    • <strong>Scheduling an appointment with your healthcare provider within 7-14 days</strong><br>
+                    • Bringing your complete results report to the appointment<br>
+                    • Discussing treatment or lifestyle modification options<br>
+                    • Following up with additional testing if recommended</p>
+
+                    <p><strong>💡 Important Reminders:</strong><br>
+                    • Our staff are not medical doctors and cannot provide medical advice<br>
+                    • All abnormal results should be reviewed by a qualified healthcare provider<br>
+                    • Do not make medication changes without consulting your doctor<br>
+                    • Keep a copy of your results for your medical records</p>
+
+                    <p><strong>📞 Need Help?</strong><br>
+                    If you have questions about accessing your results or scheduling follow-up testing, we're here to help:<br>
+                    Phone: <span class="merge-tag">[PHONE]</span><br>
+                    Email: <span class="merge-tag">[EMAIL]</span></p>
+
+                    <p><strong>🔄 Need Additional Testing?</strong><br>
+                    If your doctor orders follow-up tests, we'd be happy to provide mobile service again. Just give us a call!</p>
+
+                    <p>Thank you for choosing us for your testing needs. We wish you continued good health!</p>
+
+                    <div class="signature-block">
+Best regards,<br>
+<span class="merge-tag">[YOUR NAME]</span><br>
+<span class="merge-tag">[BUSINESS NAME]</span><br>
+📞 <span class="merge-tag">[PHONE]</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="copy-button" onclick="copyTemplate(6)">📋 Copy Template</button>
+        </div>
+
+        <!-- TEMPLATE 7: REFERRAL REQUEST -->
+        <div class="template-section">
+            <div class="template-header">
+                <span>🌟 Template 7: Referral Request</span>
+                <span class="template-number">#7</span>
+            </div>
+
+            <div class="use-case">
+                <strong>When to Use:</strong> 1-2 weeks after service completion, for satisfied clients.
+            </div>
+
+            <div class="email-card">
+                <div class="email-subject">
+                    <label>Subject Line:</label>
+                    Know Someone Who Needs Testing? Share the Convenience! 🎁
+                </div>
+                <div class="email-body">
+                    <p>Hi <span class="merge-tag">[CLIENT FIRST NAME]</span>,</p>
+
+                    <p>We hope you're doing well! It was our pleasure serving you recently with

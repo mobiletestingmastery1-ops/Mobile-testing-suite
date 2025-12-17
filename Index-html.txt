@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Testing Mastery - Professional Document Suite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .access-gate {
+            max-width: 500px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .access-gate h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .access-gate p {
+            color: #64748b;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .access-gate input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .access-gate input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .access-gate button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .access-gate button:hover {
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: #dc2626;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .lock-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .header {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 18px;
+        }
+
+        .welcome-message {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .welcome-message h2 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .document-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid;
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .document-card.blue { border-top-color: #3b82f6; }
+        .document-card.green { border-top-color: #10b981; }
+        .document-card.purple { border-top-color: #8b5cf6; }
+        .document-card.amber { border-top-color: #f59e0b; }
+        .document-card.emerald { border-top-color: #059669; }
+        .document-card.rose { border-top-color: #ec4899; }
+
+        .document-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .document-card h3 {
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .document-card p {
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .document-features {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .document-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .document-features li {
+            color: #475569;
+            font-size: 13px;
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .document-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .bonus-section {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .bonus-section h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .bonus-section p {
+            font-size: 16px;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .bonus-item {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .bonus-item h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .support-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .support-section h2 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .support-section p {
+            color: #64748b;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .contact-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-btn {
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-btn.email {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .contact-btn.community {
+            background: #10b981;
+            color: white;
+        }
+
+        .footer {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .footer p {
+            margin: 10px 0;
+        }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: 2px solid white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bonus-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ACCESS GATE -->
+    <div class="access-gate" id="accessGate">
+        <div class="lock-icon">🔒</div>
+        <h1>Welcome Back!</h1>
+        <p>Enter your access code to view your Professional Document Suite</p>
+        <input 
+            type="password" 
+            id="accessCode" 
+            placeholder="Enter Your Access Code"
+            onkeypress="if(event.key === 'Enter') checkAccess()"
+        >
+        <button onclick="checkAccess()">Access Documents</button>
+        <p class="error-message" id="errorMessage" style="display: none;">
+            Invalid access code. Please check your purchase confirmation email.
+        </p>
+        <p style="margin-top: 30px; font-size: 13px; color: #94a3b8;">
+            Don't have an access code? <a href="#" style="color: #667eea; text-decoration: none; font-weight: 600;">Purchase the Document Suite</a>
+        </p>
+    </div>
+
+    <!-- MAIN CONTENT (Hidden until access granted) -->
+    <div class="container" id="mainContent">
+        <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+
+        <div class="header">
+            <h1>Mobile Testing Mastery</h1>
+            <p>Professional Document Suite</p>
+        </div>
+
+        <div class="welcome-message">
+            <h2>🎉 Welcome to Your Document Suite!</h2>
+            <p>You now have lifetime access to all 6 professional documents. Download, customize, and use them in your mobile testing business!</p>
+        </div>
+
+        <!-- DOCUMENTS GRID -->
+        <div class="documents-grid">
+            <!-- Document 1 -->
+            <div class="document-card blue">
+                <div class="document-icon">📋</div>
+                <h3>Client Intake & Consent Form</h3>
+                <p>Complete HIPAA-compliant intake form with consent, medical history, and electronic signatures.</p>
+                <div class="document-features">
+                    <ul>
+                        <li>HIPAA Compliant</li>
+                        <li>Medical History Section</li>
+                        <li>Electronic Signatures</li>
+                        <li>Service Selection Options</li>
+                        <li>Print & Digital Ready</li>
+                    </ul>
+                </div>
+                <a href="#" class="download-btn" onclick="downloadDocument(1)">📥 Download Form</a>
+            </div>
+
+            <!-- Document 2 -->
+            <div class="document-card green">
+                <div class="document-icon">📄</div>
+                <h3>Results Release & Authorization</h3>
+                <p>Legal document for authorizing release of test results to clients or third parties.</p>
+                <div class="document-features">
+                    <ul>
+                        <li>Court-Admissible Format</li>
+                        <li>Third-Party Release Options</li>
+                        <li>Multiple Delivery Methods</li>
+                        <li>Witness/Notary Section</li>
+                        <li>HIPAA Compliance Language</li>
+                    </ul>
+                </div>
+                <a href="#" class="download-btn" onclick="downloadDocument(2)">📥 Download Form</a>
+            </div>
+
+            <!-- Document 3 -->
+            <div class="document-card purple">
+                <div class="document-icon">🧪</div>
+                <h3>Professional Results Template</h3>
+                <p>Branded template for delivering test results that builds credibility and trust.</p>
+                <div class="document-features">
+                    <ul>
+                        <li>Multiple Result Formats</li>
+                        <li>Reference Ranges Included</li>
+                        <li>Professional Design</li>
+                        <li>QR Code Verification</li>
+                        <li>Medical Director Signatures</li>
+                    </ul>
+                </div>
+                <a href="#" class="download-btn" onclick="downloadDocument(3)">📥 Download Template</a>
+            </div>
+
+            <!-- Document 4 -->
+            <div class="document-card amber">
+                <div class="document-icon">✅</div>
+                <h3>Mobile Service Checklist</h3>
+                <p>Step-by-step checklist ensuring consistent, professional service delivery every time.</p>
+                <div class="document-features">
+                    <ul>
+                        <li>100+ Checkpoint Items</li>
+                        <li>Progress Tracking</li>
+                        <li>Equipment Checklists</li>
+                        <li>Time Logging</li>
+                        <li>Quality Assurance Section</li>
+                    </ul>
+                </div>
+                <a href="#" class="download-btn" onclick="downloadDocument(4)">📥 Download Checklist</a>
+            </div>
+
+            <!-- Document 5 -->
+            <div class="document-card emerald">
+                <div class="document-icon">💰</div>
+                <h3>Service Menu & Price List</h3>
+                <p>Professional pricing document with transparent rates for all services and packages.</p>
+                <div class="document-features">
+                    <ul>
+                        <li>DNA, Drug & Phlebotomy Pricing</li>
+                        <li>Package Deal Bundles</li>
+                        <li>Travel Fee Structure</li>
+                        <li>Payment Options Listed</li>
+                        <li>FAQ Section Included</li>
+                    </ul>
+                </div>
+                <a href="#" class="download-btn" onclick="downloadDocument(5)">📥 Download Price List</a>
+            </div>
+
+            <!-- Document 6 -->
+            <div class="document-card rose">
+                <div class="document-icon">📧</div>
+                <h3>Client Communication Templates</h3>
+                <p>11 professional email templates for every client interaction and touchpoint.</p>
+                <div class="document-features">
+                    <ul>
+                        <li>11 Ready-to-Use Templates</li>
+                        <li>Confirmation & Reminders</li>
+                        <li>Results Notifications</li>
+                        <li>Referral Requests</li>
+                        <li>Merge Tags Included</li>
+                    </ul>
+                </div>
+                <a href="#" class="download-btn" onclick="downloadDocument(6)">📥 Download Templates</a>
+            </div>
+        </div>
+
+        <!-- BONUS SECTION -->
+        <div class="bonus-section">
+            <h2>🎁 Exclusive Bonuses Included</h2>
+            <p>As a valued customer, you also get these additional resources at no extra cost!</p>
+            
+            <div class="bonus-grid">
+                <div class="bonus-item">
+                    <h3>📚 Implementation Guide</h3>
+                    <p>Step-by-step instructions for customizing and using each document in your business.</p>
+                </div>
+                <div class="bonus-item">
+                    <h3>🎨 Branding Tips</h3>
+                    <p>Professional guidance on adding your logo and maintaining consistent branding.</p>
+                </div>
+                <div class="bonus-item">
+                    <h3>⚖️ Compliance Checklist</h3>
+                    <p>Ensure you're meeting all legal and regulatory requirements in your state.</p>
+                </div>
+                <div class="bonus-item">
+                    <h3>🔄 Lifetime Updates</h3>
+                    <p>Get free updates whenever we improve or add new documents to the suite.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUPPORT SECTION -->
+        <div class="support-section">
+            <h2>💬 Need Help?</h2>
+            <p>We're here to support your success! If you have questions about using these documents or need customization assistance, reach out anytime.</p>
+            
+            <div class="contact-options">
+                <a href="mailto:support@mobiletestingmastery.com" class="contact-btn email">
+                    📧 Email Support
+                </a>
+                <a href="#" class="contact-btn community">
+                    👥 Join Our Community
+                </a>
+            </div>
+
+            <p style="margin-top: 30px; font-size: 14px; color: #94a3b8;">
+                <strong>Response Time:</strong> We typically respond within 24 hours on business days.
+            </p>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p><strong>Mobile Testing Mastery</strong></p>
+            <p>Professional Document Suite | Version 1.0</p>
+            <p style="margin-top: 20px;">
+                © 2024 Mobile Testing Mastery. All rights reserved.<br>
+                These documents are licensed for use by the purchaser only. Unauthorized distribution is prohibited.
+            </p>
+            <p style="margin-top: 20px; font-size: 12px;">
+                <a href="#" style="color: #667eea; text-decoration: none; margin: 0 10px;">Terms of Use</a> |
+                <a href="#" style="color: #667eea; text-decoration: none; margin: 0 10px;">Privacy Policy</a> |
+                <a href="#" style="color: #667eea; text-decoration: none; margin: 0 10px;">Support</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Set your access code here (change this to your unique code)
+        const VALID_ACCESS_CODE = "MTM2024";
+
+        function checkAccess() {
+            const inputCode = document.getElementById('accessCode').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (inputCode === VALID_ACCESS_CODE) {
+                // Grant access
+                document.getElementById('accessGate').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                
+                // Store access in session
+                sessionStorage.setItem('authenticated', 'true');
+                
+                // Clear the input
+                document.getElementById('accessCode').value = '';
+                errorMessage.style.display = 'none';
+            } else {
+                // Show error
+                errorMessage.style.display = 'block';
+                document.getElementById('accessCode').value = '';
+            }
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.removeItem('authenticated');
+                document.getElementById('accessGate').style.display = 'block';
+                document.getElementById('mainContent').style.display = 'none';
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function downloadDocument(docNumber) {
+            const docNames = {
+                1: 'Client Intake & Consent Form',
+                2: 'Results Release & Authorization',
+                3: 'Professional Results Template',
+                4: 'Mobile Service Checklist',
+                5: 'Service Menu & Price List',
+                6: 'Client Communication Templates'
+            };
+            
+            alert(`Downloading: ${docNames[docNumber]}\n\nIn production, this would download the actual document file.\n\nFor now, you can print each document directly from the artifact viewer.`);
+        }
+
+        // Check if user is already authenticated
+        window.onload = function() {
+            if (sessionStorage.getItem('authenticated') === 'true') {
+                document.getElementById('accessGate').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>

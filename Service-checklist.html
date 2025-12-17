@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Service Checklist</title>
+    <style>
+        @media print {
+            .no-print { display: none; }
+            body { margin: 0; padding: 20px; }
+            .checklist-item input[type="checkbox"] {
+                -webkit-appearance: checkbox;
+                appearance: checkbox;
+            }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            background: white;
+            padding: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 4px solid #f59e0b;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .logo-space {
+            background: #fffbeb;
+            border: 2px dashed #f59e0b;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #f59e0b;
+            font-style: italic;
+        }
+        
+        h1 {
+            color: #d97706;
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        .appointment-info {
+            background: #fffbeb;
+            border: 2px solid #fbbf24;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .info-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .info-item label {
+            display: block;
+            font-weight: 600;
+            color: #92400e;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        
+        .info-item input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        .section {
+            margin: 30px 0;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            background: #f59e0b;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .subsection-title {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 8px 15px;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 20px 0 10px 0;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px;
+            margin: 8px 0;
+            background: #fafafa;
+            border-radius: 6px;
+            border-left: 3px solid #e5e7eb;
+            transition: all 0.2s;
+        }
+        
+        .checklist-item:hover {
+            background: #fffbeb;
+            border-left-color: #f59e0b;
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 12px;
+            margin-top: 3px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .checklist-item.checked {
+            background: #dcfce7;
+            border-left-color: #16a34a;
+        }
+        
+        .checklist-item label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .checklist-item .detail {
+            display: block;
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        
+        .priority-high {
+            border-left: 3px solid #dc2626;
+        }
+        
+        .priority-high::before {
+            content: "⚠️ ";
+        }
+        
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .notes-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            min-height: 80px;
+        }
+        
+        .notes-box label {
+            display: block;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+        
+        .notes-box textarea {
+            width: 100%;
+            min-height: 60px;
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 13px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        
+        .time-log {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+        
+        .time-log-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 8px 0;
+        }
+        
+        .time-log input {
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .signature-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .signature-box {
+            text-align: center;
+        }
+        
+        .signature-line {
+            border-bottom: 2px solid #333;
+            min-height: 50px;
+            margin-bottom: 8px;
+        }
+        
+        .signature-label {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+        }
+        
+        button {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        
+        button:hover {
+            background: #d97706;
+        }
+        
+        .progress-bar {
+            background: #e5e7eb;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #10b981 0%, #16a34a 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 5px;
+        }
+        
+        .status-pending {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .status-complete {
+            background: #dcfce7;
+            color: #166534;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container no-print">
+        <button onclick="window.print()">Print Checklist</button>
+        <button onclick="resetChecklist()">Reset All</button>
+        <button onclick="saveProgress()">Save Progress</button>
+    </div>
+
+    <div class="container">
+        <div class="logo-space">
+            [Your Business Logo Here]
+        </div>
+        
+        <div class="header">
+            <h1>Mobile Service Checklist</h1>
+            <p class="subtitle">Professional Field Testing Protocol</p>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="progress-bar no-print">
+            <div class="progress-fill" id="progressBar">0%</div>
+        </div>
+
+        <!-- Appointment Information -->
+        <div class="appointment-info">
+            <h3 style="margin-top: 0; color: #92400e;">📋 Appointment Details</h3>
+            <div class="info-row">
+                <div class="info-item">
+                    <label>Client Name:</label>
+                    <input type="text" name="clientName">
+                </div>
+                <div class="info-item">
+                    <label>Date:</label>
+                    <input type="date" name="appointmentDate">
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-item">
+                    <label>Service Type:</label>
+                    <input type="text" name="serviceType" placeholder="DNA, Drug Test, Phlebotomy, etc.">
+                </div>
+                <div class="info-item">
+                    <label>Appointment Time:</label>
+                    <input type="time" name="appointmentTime">
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-item" style="grid-column: 1 / -1;">
+                    <label>Service Address:</label>
+                    <input type="text" name="serviceAddress">
+                </div>
+            </div>
+        </div>
+
+        <!-- PRE-APPOINTMENT PREPARATION -->
+        <div class="section">
+            <div class="section-title">
+                🏠 PRE-APPOINTMENT PREPARATION (24 Hours Before)
+            </div>
+
+            <div class="subsection-title">Client Communication</div>
+            <div class="checklist-item priority-high">
+                <input type="checkbox" id="check1" onchange="updateProgress()">
+                <label for="check1">
+                    Confirm appointment via phone call or text message
+                    <span class="detail">Verify date, time, location, and service type</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check2" onchange="updateProgress()">
+                <label for="check2">
+                    Send pre-appointment instructions and preparation requirements
+                    <span class="detail">Fasting requirements, medication restrictions, hydration instructions</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check3" onchange="updateProgress()">
+                <label for="check3">
+                    Confirm client has valid photo ID ready
+                    <span class="detail">Required for all testing services</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check4" onchange="updateProgress()">
+                <label for="check4">
+                    Request address details (parking, gate codes, unit numbers)
+                </label>
+            </div>
+
+            <div class="subsection-title">Route & Logistics Planning</div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check5" onchange="updateProgress()">
+                <label for="check5">
+                    Map route and estimate travel time
+                    <span class="detail">Account for traffic and parking</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check6" onchange="updateProgress()">
+                <label for="check6">
+                    Check weather forecast for the appointment day
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check7" onchange="updateProgress()">
+                <label for="check7">
+                    Plan for adjacent appointments if scheduling multiple visits
+                </label>
+            </div>
+
+            <div class="subsection-title">Documentation Review</div>
+            <div class="checklist-item priority-high">
+                <input type="checkbox" id="check8" onchange="updateProgress()">
+                <label for="check8">
+                    Review client intake form and medical history
+                    <span class="detail">Note any allergies, conditions, or special requirements</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check9" onchange="updateProgress()">
+                <label for="check9">
+                    Verify insurance authorization or payment confirmation
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check10" onchange="updateProgress()">
+                <label for="check10">
+                    Review specific test protocols and requirements
+                    <span class="detail">Chain of custody, special handling, etc.</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- EQUIPMENT & SUPPLIES CHECKLIST -->
+        <div class="section">
+            <div class="section-title">
+                🧰 EQUIPMENT & SUPPLIES CHECKLIST
+            </div>
+
+            <div class="subsection-title">Essential Equipment</div>
+            <div class="equipment-grid">
+                <div class="checklist-item">
+                    <input type="checkbox" id="equip1" onchange="updateProgress()">
+                    <label for="equip1">Phlebotomy chair/portable stool</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="equip2" onchange="updateProgress()">
+                    <label for="equip2">Sharps container (secure)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="equip3" onchange="updateProgress()">
+                    <label for="equip3">Biohazard bags</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="equip4" onchange="updateProgress()">
+                    <label for="equip4">Portable cooler with ice packs</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="equip5" onchange="updateProgress()">
+                    <label for="equip5">Blood pressure cuff</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="equip6" onchange="updateProgress()">
+                    <label for="equip6">Thermometer</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="equip7" onchange="updateProgress()">
+                    <label for="equip7">Pulse oximeter</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="equip8" onchange="updateProgress()">
+                    <label for="equip8">Portable scale (if needed)</label>
+                </div>
+            </div>
+
+            <div class="subsection-title">Phlebotomy Supplies</div>
+            <div class="equipment-grid">
+                <div class="checklist-item">
+                    <input type="checkbox" id="supply1" onchange="updateProgress()">
+                    <label for="supply1">Needles (various gauges)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="supply2" onchange="updateProgress()">
+                    <label for="supply2">Vacutainer tubes (multiple types)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="supply3" onchange="updateProgress()">
+                    <label for="supply3">Butterfly needles</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="supply4" onchange="updateProgress()">
+                    <label for="supply4">Tourniquets</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="supply5" onchange="updateProgress()">
+                    <label for="supply5">Alcohol prep pads</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="supply6" onchange="updateProgress()">
+                    <label for="supply6">Gauze pads</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="supply7" onchange="updateProgress()">
+                    <label for="supply7">Medical tape</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="supply8" onchange="updateProgress()">
+                    <label for="supply8">Bandages</label>
+                </div>
+            </div>
+
+            <div class="subsection-title">Drug Testing Supplies</div>
+            <div class="equipment-grid">
+                <div class="checklist-item">
+                    <input type="checkbox" id="drug1" onchange="updateProgress()">
+                    <label for="drug1">Drug test cups/panels</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="drug2" onchange="updateProgress()">
+                    <label for="drug2">Specimen collection cups</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="drug3" onchange="updateProgress()">
+                    <label for="drug3">Temperature strips</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="drug4" onchange="updateProgress()">
+                    <label for="drug4">Chain of custody forms</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="drug5" onchange="updateProgress()">
+                    <label for="drug5">Specimen seals/labels</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="drug6" onchange="updateProgress()">
+                    <label for="drug6">Timer/stopwatch</label>
+                </div>
+            </div>
+
+            <div class="subsection-title">DNA Testing Supplies</div>
+            <div class="equipment-grid">
+                <div class="checklist-item">
+                    <input type="checkbox" id="dna1" onchange="updateProgress()">
+                    <label for="dna1">Buccal swab collection kits</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="dna2" onchange="updateProgress()">
+                    <label for="dna2">Specimen envelopes</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="dna3" onchange="updateProgress()">
+                    <label for="dna3">Chain of custody forms</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="dna4" onchange="updateProgress()">
+                    <label for="dna4">Photo documentation device</label>
+                </div>
+            </div>
+
+            <div class="subsection-title">PPE & Safety</div>
+            <div class="equipment-grid">
+                <div class="checklist-item priority-high">
+                    <input type="checkbox" id="ppe1" onchange="updateProgress()">
+                    <label for="ppe1">Disposable gloves (multiple sizes)</label>
+                </div>
+                <div class="checklist-item priority-high">
+                    <input type="checkbox" id="ppe2" onchange="updateProgress()">
+                    <label for="ppe2">Face masks</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ppe3" onchange="updateProgress()">
+                    <label for="ppe3">Hand sanitizer</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ppe4" onchange="updateProgress()">
+                    <label for="ppe4">Disinfectant wipes</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ppe5" onchange="updateProgress()">
+                    <label for="ppe5">Paper towels</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ppe6" onchange="updateProgress()">
+                    <label for="ppe6">Disposable drapes/underpad</label>
+                </div>
+            </div>
+
+            <div class="subsection-title">Administrative Supplies</div>
+            <div class="equipment-grid">
+                <div class="checklist-item">
+                    <input type="checkbox" id="admin1" onchange="updateProgress()">
+                    <label for="admin1">Clipboard</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="admin2" onchange="updateProgress()">
+                    <label for="admin2">Pens (multiple)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="admin3" onchange="updateProgress()">
+                    <label for="admin3">Labels/label printer</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="admin4" onchange="updateProgress()">
+                    <label for="admin4">Specimen labels</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="admin5" onchange="updateProgress()">
+                    <label for="admin5">Business cards</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="admin6" onchange="updateProgress()">
+                    <label for="admin6">Payment processing device</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="admin7" onchange="updateProgress()">
+                    <label for="admin7">Blank forms (intake, consent, etc.)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="admin8" onchange="updateProgress()">
+                    <label for="admin8">Tablet/smartphone (charged)</label>
+                </div>
+            </div>
+
+            <div class="subsection-title">Vehicle Check</div>
+            <div class="checklist-item">
+                <input type="checkbox" id="vehicle1" onchange="updateProgress()">
+                <label for="vehicle1">Sufficient fuel for round trip</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="vehicle2" onchange="updateProgress()">
+                <label for="vehicle2">GPS/navigation system functioning</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="vehicle3" onchange="updateProgress()">
+                <label for="vehicle3">Vehicle clean and professional appearance</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="vehicle4" onchange="updateProgress()">
+                <label for="vehicle4">Insurance and registration current</label>
+            </div>
+        </div>
+
+        <!-- ARRIVAL & CLIENT GREETING -->
+        <div class="section">
+            <div class="section-title">
+                🚗 ARRIVAL & CLIENT GREETING
+            </div>
+
+            <div class="time-log">
+                <strong>⏰ Time Log</strong>
+                <div class="time-log-row">
+                    <div>
+                        <label style="font-size: 12px; color: #475569;">Departure Time:</label>
+                        <input type="time" name="departureTime">
+                    </div>
+                    <div>
+                        <label style="font-size: 12px; color: #475569;">Arrival Time:</label>
+                        <input type="time" name="arrivalTime">
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="arrival1" onchange="updateProgress()">
+                <label for="arrival1">
+                    Arrive 5-10 minutes before scheduled appointment
+                    <span class="detail">Never early enough to be intrusive, never late</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="arrival2" onchange="updateProgress()">
+                <label for="arrival2">
+                    Call/text client upon arrival to announce presence
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="arrival3" onchange="updateProgress()">
+                <label for="arrival3">
+                    Put on professional attire (lab coat, badge, etc.)
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="arrival4" onchange="updateProgress()">
+                <label for="arrival4">
+                    Gather all necessary equipment before approaching door
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="arrival5" onchange="updateProgress()">
+                <label for="arrival5">
+                    Greet client professionally and introduce yourself
+                    <span class="detail">"Hi, I'm [Name] from [Business]. I'm here for your [service type] appointment."</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="arrival6" onchange="updateProgress()">
+                <label for="arrival6">
+                    Show professional credentials and photo ID if requested
+                </label>
+            </div>
+        </div>
+
+        <!-- IDENTIFICATION & VERIFICATION -->
+        <div class="section">
+            <div class="section-title">
+                🆔 IDENTIFICATION & VERIFICATION
+            </div>
+
+            <div class="checklist-item priority-high">
+                <input type="checkbox" id="id1" onchange="updateProgress()">
+                <label for="id1">
+                    Request and verify client's photo ID (driver's license, passport, state ID)
+                    <span class="detail">CRITICAL: Required for all legal and chain of custody testing</span>
+                </label>
+            </div>
+            <div class="checklist-item priority-high">
+                <input type="checkbox" id="id2" onchange="updateProgress()">
+                <label for="id2">
+                    Confirm ID matches appointment name and date of birth
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="id3" onchange="updateProgress()">
+                <label for="id3">
+                    Document ID information on appropriate forms
+                    <span class="detail">ID number, expiration date, issuing state</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="id4" onchange="updateProgress()">
+                <label for="id4">
+                    Take photo of ID (if required for chain of custody)
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="id5" onchange="updateProgress()">
+                <label for="id5">
+                    For DNA testing: Photograph all participants with ID
+                </label>
+            </div>
+        </div>
+
+        <!-- CONSENT & DOCUMENTATION -->
+        <div class="section">
+            <div class="section-title">
+                📝 CONSENT FORM COMPLETION
+            </div>
+
+            <div class="checklist-item priority-high">
+                <input type="checkbox" id="consent1" onchange="updateProgress()">
+                <label for="consent1">
+                    Review intake form for completeness
+                    <span class="detail">If not completed in advance, have client complete now</span>
+                </label>
+            </div>
+            <div class="checklist-item priority-high">
+                <input type="checkbox" id="consent2" onchange="updateProgress()">
+                <label for="consent2">
+                    Explain testing procedure and what to expect
+                </label>
+            </div>
+            <div class="checklist-item priority-high">
+                <input type="checkbox" id="consent3" onchange="updateProgress()">
+                <label for="consent3">
+                    Review and obtain signature on consent form
+                    <span class="detail">Ensure client understands all sections before signing</span>
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="consent4" onchange="updateProgress()">
+                <label for="consent4">
+                    Answer any questions about the testing process
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="consent5" onchange="updateProgress()">
+                <label for="consent5">
+                    Review HIPAA privacy notice and obtain acknowledgment
+                </label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="consent6" onchange="updateProgress()">
+                <label for="consent6">
+                    Complete chain of custody documentation (if applicable)
+                </label>
